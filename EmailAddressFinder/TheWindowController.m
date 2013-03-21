@@ -46,18 +46,22 @@
 	
 		NSArray *a = [es findMatchesInString:str];
 		NSMutableString *str = [NSMutableString stringWithCapacity:256];
-		NSString *entry;
 		
 		for(id foo in a) {
-			if(es.wantMailboxSpecifiers) {
-				NSDictionary *dict = (NSDictionary *)foo;
-				entry = [NSString stringWithFormat:@"Name: %@ Address: %@  Mailbox: %@", dict[@"name"], dict[@"address"], dict[@"mailbox"]];
-			} else {
-				entry = (NSString *)foo;
+			if([foo isMemberOfClass:[NSNull class]]) {
+				NSLog(@"YIKES! failed to process address");
+				continue;
 			}
+			NSDictionary *dict = (NSDictionary *)foo;
+			NSString *entry;
+			if(dict[@"mailbox"]) {
+				entry = [NSString stringWithFormat:@"Address: %@  Name: %@  Mailbox: %@", dict[@"address"], dict[@"name"], dict[@"mailbox"]];
+			} else {
+				entry = [NSString stringWithFormat:@"Address: %@", dict[@"address"]];
+			}
+			[str appendString:entry];
+			[str appendString:@"\n"];
 		}
-		[str appendString:entry];
-		[str appendString:@"\n"];
 		
 		[resultsList setString:str];
 	}
@@ -70,18 +74,18 @@
 		} );
 }
 
-- (IBAction)mailboxAction:(id)sender
-{
-	NSButton *but = (NSButton *)sender;
-	
-	BOOL useMailbox = [but state] == NSOnState;
-	
-	es.wantMailboxSpecifiers = useMailbox;
-}
-
 - (IBAction)regexSelection:(id)sender
 {
 	es.regex = [(NSPopUpButton *)sender titleOfSelectedItem];
+}
+
+- (IBAction)testSelection:(id)sender
+{
+	NSString *str = [testString string];
+
+	BOOL val = [es isValidEmail:str];
+	[resultsList setString:val ? @"YES!" : @"No"];
+
 }
 
 @end

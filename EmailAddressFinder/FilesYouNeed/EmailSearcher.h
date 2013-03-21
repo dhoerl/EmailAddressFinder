@@ -9,9 +9,10 @@
 #import <Foundation/Foundation.h>
 
 @interface EmailSearcher : NSObject
-@property (nonatomic, assign)	BOOL wantMailboxSpecifiers;		// ie "name" <a@b.com>
 @property (nonatomic, copy)		NSString *regex;			// filename
 
-- (NSArray *)findMatchesInString:(NSString *)str;
+- (NSArray *)findMatchesInString:(NSString *)str;			// Array of Dictionaries
+
+- (BOOL)isValidEmail:(NSString *)str;						// is string a simple valid email address, no leading space etc
 
 @end

@@ -8,9 +8,20 @@
 
 #import "EmailSearcher.h"
 
+static NSCharacterSet *atSign;
+
 @implementation EmailSearcher
 {
 	NSRegularExpression *reg;
+	BOOL hasNL;
+	BOOL hasCR;
+}
+
++ (void)initialize
+{
+	if(self == [EmailSearcher class]) {
+		atSign = [NSCharacterSet characterSetWithCharactersInString:@"@"];
+	}
 }
 
 - (instancetype)init
@@ -37,8 +48,19 @@
 	assert(reg && !error);
 }
 
-- (NSArray *)findMatchesInString:(NSString *)str
+- (NSArray *)findMatchesInString:(NSString *)origStr
 {
+	// Pretest - if not possible to contain addresses then stop now
+	{
+		NSRange range = [origStr rangeOfCharacterFromSet:atSign];
+		if(range.location == NSNotFound) {
+			return nil;
+		}
+	}
+
+	NSString *str = [origStr stringByReplacingOccurrencesOfString:@"\n" withString:@""];
+	// str = [origStr stringByReplacingOccurrencesOfString:@"\r" withString:@""]; // if needbe
+
 	NSArray *ret = [reg matchesInString:str options:0 range:NSMakeRange(0, [str length])];
 	NSMutableArray *mret;
 	if(ret) {
@@ -46,29 +68,30 @@
 
 		for(NSTextCheckingResult *spec in ret) {
 			NSRange r = spec.range;
-			unichar c = [str characterAtIndex:r.location];
+			unichar c = r.location ? [str characterAtIndex:r.location - 1] : 0;
 			unichar d = (r.location+r.length) < [str length] ? [str characterAtIndex:r.location+r.length] : 0;
-			
-			id entry = [NSNull null];	// if a Mailbox address fails to parse
-	
+			NSDictionary *entry;
+			NSString *address;
+
+			NSLog(@"MATCH: -%@-", [str substringWithRange:r]);
+
 			// not the first character of the string
 			if(c == '<' && d == '>') {
 				// Someone provided a mailbox style address
-				++r.location;
-				--r.length;
-				NSString *address = [str substringWithRange:r];
-				
-				if(self.wantMailboxSpecifiers) {
+				address = [str substringWithRange:r];
+				{
 					--r.location;
 					r.length += 2;
 
 					// Find the full "name" field
 					NSInteger loc		= r.location - 1;
-					NSInteger origLoc	= loc;
+					NSInteger origLoc	= r.location;
 					NSInteger endLoc	= r.location;
 
 					BOOL isQuoted = NO;
 					BOOL foundChar = NO;
+					BOOL matchingQuotes = NO;
+
 					while(loc >= 0) {
 						unichar t = [str characterAtIndex:loc--];
 						BOOL escaped = loc >= 0 && [str characterAtIndex:loc] == '\\';
@@ -101,11 +124,12 @@
 						}
 						
 						// handle quotes
-						if(c == '"') {
+						if(t == '"') {
 							if(!foundChar) {
 								isQuoted = YES;
 							} else {
 								// Got the whole string
+								matchingQuotes = YES;
 								break;
 							}
 						}
@@ -117,7 +141,8 @@
 					
 					NSString *name;
 					NSInteger realEndLoc = r.location + r.length;
-					if(foundChar) {
+					if(foundChar && !(isQuoted && !matchingQuotes)) {
+						// If we got an initial quote, better have found the matching one
 						NSRange nameRange = NSMakeRange(loc, endLoc - loc);
 						name = [str substringWithRange:nameRange];
 						r.location = loc;
@@ -126,16 +151,14 @@
 						r.location = origLoc;
 					}
 					r.length = realEndLoc - r.location;
-NSLog(@"loc %d endLoc=%d RANGE %@ str=%@", loc, realEndLoc, NSStringFromRange(r), str);
+					//NSLog(@"loc %d endLoc=%d RANGE %@ str=%@", loc, realEndLoc, NSStringFromRange(r), str);
 					NSString *mailbox = [str substringWithRange:r];
 					
 					entry = @{ @"name" : name, @"address" : address, @"mailbox" : mailbox };
-				} else {
-					entry = address;
 				}
-			} else
-			if(!self.wantMailboxSpecifiers) {
-				entry = [str substringWithRange:r];
+			} else {
+				address = [str substringWithRange:r];
+				entry = @{ @"address" : address };
 			}
 			[mret addObject:entry];
 		}
@@ -145,8 +168,17 @@ NSLog(@"loc %d endLoc=%d RANGE %@ str=%@", loc, realEndLoc, NSStringFromRange(r)
 
 - (BOOL)isValidEmail:(NSString *)str
 {
-	NSTextCheckingResult *match = [reg firstMatchInString:str options:0 range:NSMakeRange(0, [str length])];
-	return match ? YES : NO;
+	BOOL ret = NO;
+	NSUInteger len = [str length];
+
+	NSTextCheckingResult *match = [reg firstMatchInString:str options:0 range:NSMakeRange(0, len)];
+	if(match) {
+		NSRange r = match.range;
+		if(r.location == 0 && r.length == len) {
+			ret = YES;
+		}
+	}
+	return ret;
 }
 
 @end
