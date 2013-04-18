@@ -1,0 +1,1 @@
+Possibly remove the mailto text as its processed, so that the final reduced string can be searched again.

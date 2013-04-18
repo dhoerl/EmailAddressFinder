@@ -16,6 +16,7 @@
 {
 	IBOutlet NSTextView *testString;
 	IBOutlet NSTextView *resultsList;
+	IBOutlet NSPopUpButton *regExButton;
 	
 	EmailSearcher *es;
 }
@@ -25,7 +26,9 @@
     [super windowDidLoad];
 	
 	es = [EmailSearcher new];
-        // Implement this method to handle any initialization after your window controller's window has been loaded from its nib file.
+
+	[regExButton selectItemWithTitle:@"Mailto"];
+	[self regexSelection:regExButton];
 }
 
 - (void)windowWillClose:(NSNotification *)notification
@@ -41,6 +44,19 @@
 	NSString *str = [testString string];
 	if(![str length]) {
 		NSBeep();
+	} else
+	if([es.regex isEqualToString:@"Mailto"]) {
+		[resultsList setString:@""];
+	
+		NSArray *a = [es findMailtoItems:str];
+		NSMutableString *str = [NSMutableString stringWithCapacity:256];
+
+		for(NSDictionary *dict in a) {
+			[str appendString:dict.description];
+			[str appendString:@"\n"];
+		}
+		
+		[resultsList setString:str];
 	} else {
 		[resultsList setString:@""];
 	

@@ -19,6 +19,8 @@
 		DE5B16D016FA2B22008D134B /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = DE5B16CF16FA2B22008D134B /* README.md */; };
 		DE5B16D416FB3628008D134B /* TheWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = DE5B16D216FB3628008D134B /* TheWindowController.m */; };
 		DE5B16D516FB3628008D134B /* TheWindowController.xib in Resources */ = {isa = PBXBuildFile; fileRef = DE5B16D316FB3628008D134B /* TheWindowController.xib */; };
+		DE5B174516FD13C1008D134B /* Mailto.txt in Resources */ = {isa = PBXBuildFile; fileRef = DE5B174416FD13C1008D134B /* Mailto.txt */; };
+		DE5B174716FD1CD3008D134B /* TODO.txt in Resources */ = {isa = PBXBuildFile; fileRef = DE5B174616FD1CD3008D134B /* TODO.txt */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -42,6 +44,8 @@
 		DE5B16D116FB3628008D134B /* TheWindowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TheWindowController.h; sourceTree = "<group>"; };
 		DE5B16D216FB3628008D134B /* TheWindowController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TheWindowController.m; sourceTree = "<group>"; };
 		DE5B16D316FB3628008D134B /* TheWindowController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TheWindowController.xib; sourceTree = "<group>"; };
+		DE5B174416FD13C1008D134B /* Mailto.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Mailto.txt; sourceTree = "<group>"; };
+		DE5B174616FD1CD3008D134B /* TODO.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = TODO.txt; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -59,6 +63,7 @@
 		DE5B169616FA1797008D134B = {
 			isa = PBXGroup;
 			children = (
+				DE5B174616FD1CD3008D134B /* TODO.txt */,
 				DE5B16CF16FA2B22008D134B /* README.md */,
 				DE5B16A816FA1797008D134B /* EmailAddressFinder */,
 				DE5B16A116FA1797008D134B /* Frameworks */,
@@ -126,6 +131,7 @@
 				DE5B16C116FA1864008D134B /* EmailSearcher.m */,
 				DE5B16C316FA1883008D134B /* Regex1.txt */,
 				DE5B16C516FA189A008D134B /* Regex2.txt */,
+				DE5B174416FD13C1008D134B /* Mailto.txt */,
 			);
 			path = FilesYouNeed;
 			sourceTree = "<group>";
@@ -188,6 +194,8 @@
 				DE5B16C616FA189A008D134B /* Regex2.txt in Resources */,
 				DE5B16D016FA2B22008D134B /* README.md in Resources */,
 				DE5B16D516FB3628008D134B /* TheWindowController.xib in Resources */,
+				DE5B174516FD13C1008D134B /* Mailto.txt in Resources */,
+				DE5B174716FD1CD3008D134B /* TODO.txt in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

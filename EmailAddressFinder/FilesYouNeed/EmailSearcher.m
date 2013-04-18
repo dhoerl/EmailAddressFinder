@@ -27,7 +27,6 @@ static NSCharacterSet *atSign;
 - (instancetype)init
 {
 	if((self = [super init])) {
-		self.regex = @"Regex1";
 	}
 	return self;
 }
@@ -164,6 +163,101 @@ static NSCharacterSet *atSign;
 		}
 	}
 	return mret;
+}
+
+- (NSArray *)findMailtoItems:(NSString *)str
+{
+	NSMutableArray *items = [NSMutableArray array];
+	NSScanner *s = [NSScanner scannerWithString:str];
+	while(!s.isAtEnd) {
+		BOOL ret = [s scanUpToString:@"mailto:\"" intoString:NULL];
+		if(ret && !s.isAtEnd) {
+			[s scanString:@"mailto:\"" intoString:NULL];
+			
+			__autoreleasing NSString *mailTo;
+			ret = [s scanUpToString:@"\"" intoString:&mailTo];
+			if(!ret || s.isAtEnd) {
+				NSLog(@"ERROR");
+				break;
+			}
+			[s scanString:@"\"" intoString:NULL];	// for completeness
+			
+			NSDictionary *mailToDict = [self mailltoItemFrom:mailTo];
+			if(mailToDict) {
+				[items addObject:mailToDict];
+			}
+		}
+	}
+	return [items copy];
+}
+
+- (NSDictionary *)mailltoItemFrom:(NSString *)mailTo
+{
+	NSScanner *s = [NSScanner scannerWithString:mailTo];
+	NSCharacterSet *set = [NSCharacterSet characterSetWithCharactersInString:@"=&?"];
+	NSArray *addrs;
+
+	NSMutableDictionary *dict;
+	__autoreleasing NSString *val;
+	BOOL ret = [s scanUpToString:@"?" intoString:&val];
+	if(ret) {
+		addrs = [self emailsFromString:val];
+		[s scanCharactersFromSet:set intoString:NULL];
+		if([addrs count]) {
+			dict = [NSMutableDictionary dictionaryWithCapacity:5];
+			dict[@"to"] = addrs;
+		}
+	}
+	while(!s.isAtEnd && dict) {
+		ret = [s scanUpToString:@"=" intoString:&val];
+		if(!ret) break;
+		[s scanCharactersFromSet:set intoString:NULL];
+		NSString *type = [val copy];
+
+		ret = [s scanUpToString:@"&" intoString:&val];
+		if(!ret) break;
+		[s scanCharactersFromSet:set intoString:NULL];
+	
+		if([@"cc" isEqualToString:type]) {
+			addrs = [self emailsFromString:val];
+			if([addrs count]) {
+				dict[@"cc"] = addrs;
+			}
+		} else
+		if([@"bcc" isEqualToString:type]) {
+			addrs = [self emailsFromString:val];
+			if([addrs count]) {
+				dict[@"bcc"] = addrs;
+			}
+		} else
+		if([@"subject" isEqualToString:type]) {
+			addrs = [self emailsFromString:val];
+			if([addrs count]) {
+				dict[@"subject"] = [addrs lastObject];
+			}
+		} else
+		if([@"body" isEqualToString:type]) {
+			addrs = [self emailsFromString:val];
+			if([addrs count]) {
+				dict[@"body"] = [addrs lastObject];
+			}
+		}		
+	}
+	// NSLog(@"DICT: %@", dict);
+	return [dict copy];
+}
+- (NSArray *)emailsFromString:(NSString *)str
+{
+	NSArray *array = [str componentsSeparatedByString:@","];
+	NSUInteger count = [array count];
+	NSMutableArray *mArray = [NSMutableArray arrayWithCapacity:count];
+	[array enumerateObjectsUsingBlock:^(NSString *rawAddr, NSUInteger idx, BOOL *stop)
+		{
+			NSString *first = [rawAddr stringByReplacingOccurrencesOfString:@"+" withString:@" "];
+			NSString *second = [first stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+			[mArray addObject:second];
+		}];
+	return mArray;
 }
 
 - (BOOL)isValidEmail:(NSString *)str
