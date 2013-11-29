@@ -75,7 +75,7 @@ RFC5322 defines both email addresses and "mailbox specifiers" in section 3.4. "A
 
 REFERENCES
 
-- Relevant RFCs: http://code.iamcal.com/php/rfc822/ 
+- Relevant RFCs: http://code.iamcal.com/php/rfc822/
 - RFC-3986 - IPV6 syntax
 - RFC-3696 Errata ID: 1690 - Total length of email address is 254
 - RFC-5322 Errata ID: 3135 - Quoted String redefined (not approved yet, but an option for this is supported)
