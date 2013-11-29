@@ -75,25 +75,28 @@ RFC5322 defines both email addresses and "mailbox specifiers" in section 3.4. "A
 
 REFERENCES
 
-Relevant RFCs: http://code.iamcal.com/php/rfc822/
-RFC-3986 - IPV6 syntax
-RFC-3696 Errata ID: 1690 - Total length of email address is 254
-RFC-5322 Errata ID: 3135 - Quoted String redefined (not approved yet, but an option for this is supported)
-RFC-5321 4.3.1 IPv6-address-literal  = "IPv6:" IPv6-addr
-RFC-1035 DOMAIN NAMES (syntax)
-RFC-5321 SMTP - 4.3.1 IPv6-address-literal  = "IPv6:" IPv6-addr
-RFC-5952 A Recommendation for IPv6 Address Text Representation - better understand best practices in possibly reformatting values (Future)
-RFC-3696 "mailto:" specified (section 4.3):  http://tools.ietf.org/html/rfc3696 and errat: http://www.rfc-editor.org/errata_search.php?rfc=3696
-RFC-6068 "mailto: format:  http://tools.ietf.org/html/rfc6068
-Max len of local-part == 64, total is 254 - see http://www.rfc-editor.org/errata_search.php?rfc=3696 Errata ID: 1690 (ditto in RFC-5321 4.5.3.1.3. Path)
+- Relevant RFCs: http://code.iamcal.com/php/rfc822/
 
-http://blog.dominicsayers.com/category/email-address-validation/ - Priceless Source of Information on Email addresses and validation
+- RFC-3986 - IPV6 syntax
+
+- RFC-3696 Errata ID: 1690 - Total length of email address is 254
+
+- RFC-5322 Errata ID: 3135 - Quoted String redefined (not approved yet, but an option for this is supported)
+- RFC-5321 4.3.1 IPv6-address-literal  = "IPv6:" IPv6-addr
+- RFC-1035 DOMAIN NAMES (syntax)
+- RFC-5321 SMTP - 4.3.1 IPv6-address-literal  = "IPv6:" IPv6-addr
+- RFC-5952 A Recommendation for IPv6 Address Text Representation - better understand best practices in possibly reformatting values (Future)
+- RFC-3696 "mailto:" specified (section 4.3):  http://tools.ietf.org/html/rfc3696 and errat: http://www.rfc-editor.org/errata_search.php?rfc=3696
+- RFC-6068 "mailto: format:  http://tools.ietf.org/html/rfc6068
+- Max len of local-part == 64, total is 254 - see http://www.rfc-editor.org/errata_search.php?rfc=3696 Errata ID: 1690 (ditto in RFC-5321 4.5.3.1.3. Path)
+
+- http://blog.dominicsayers.com/category/email-address-validation/ - Priceless Source of Information on Email addresses and validation
 - Email Address Evaluation Blog: http://isemail.info/about
 - Comparison of various algoritms: http://fightingforalostcause.net/misc/2006/compare-email-regex.php
 - What the PHP regex suffix means (e.g., "/searchString/suffix"): http://www.php.net/manual/en/reference.pcre.pattern.modifiers.php
 
-Regex1 source: http://svn.php.net/viewvc/php/php-src/trunk/ext/filter/logical_filters.c?view=markup and ranked #1
-Regex2 source: http://jgotti.net/ and ranked #2 now (but known problem with Mailbox format, i.e., <a@b.com>, and multiple addresses)
+- Regex1 source: http://svn.php.net/viewvc/php/php-src/trunk/ext/filter/logical_filters.c?view=markup and ranked #1
+- Regex2 source: http://jgotti.net/ and ranked #2 now (but known problem with Mailbox format, i.e., <a@b.com>, and multiple addresses)
 
 Other Test Cases
-http://hackage.haskell.org/packages/archive/email-validate/0.2.3/doc/html/src/Text-Email-Validate.html
+- http://hackage.haskell.org/packages/archive/email-validate/0.2.3/doc/html/src/Text-Email-Validate.html
