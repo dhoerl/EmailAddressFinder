@@ -181,7 +181,7 @@ typedef enum { validateMode=1, scanMode } regex_typ;
 		[allowNullString state] == NSOnState	&&
 		[rfc5321IPV6 state] == NSOnState		&&
 		[rfc5321Lengths state] == NSOnState		&&
-		[cmntLevelSlider integerValue] == 5
+		[cmntLevelSlider integerValue] == 2
 	) {
 		color = [allowCFWS state] == NSOffState ? [NSColor greenColor] : [NSColor yellowColor];
 	} else {
@@ -402,8 +402,8 @@ typedef enum { validateMode=1, scanMode } regex_typ;
 		[allowNullString setState:NSOnState];
 		[rfc5321IPV6 setState:NSOnState];
 		[rfc5321Lengths setState:NSOnState];
-		[cmntLevelSlider setIntegerValue:5];
-		[cmntLevelValue setStringValue:@"5"];
+		[cmntLevelSlider setIntegerValue:2];
+		[cmntLevelValue setStringValue:@"2"];
 	} else {
 		// Validating
 		[captureGroups setState:NSOffState];

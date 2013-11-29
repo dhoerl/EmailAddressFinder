@@ -21,7 +21,7 @@ The OS X app contained in this folder provides the following features:
 
 "Wait", you say, "I've read that the RFC-5322 spec makes it impossible to create a compliant regular expression!". Technically that is correct. The spec provides for comments, and comments can nest to any depth. That said, how many email addresses have you seen with comments before? Me, none - I never saw one before reading the spec. The solution to supporting nested comments is to design a regular expression that supports nexted comments to a specified depth.
 
-Comments can occur at specific locations, and have the general form of '( 'text' ')'. So the regular expression produced here supports "(text) | (text ( text) text) | (text ( text ( text (text ( text ( text (text) text) text) text) text)". This portion of the regular expression is created in code using a user specified depth. For testing with well known test suites, a depth of 5 was necessary. In the real world, you would most likely set the control to 0 or 1 - it's your choice.
+Comments can occur at specific locations, and have the general form of '( 'text' ')'. So the regular expression produced here supports "(text) | (text ( text) text) | (text ( text ( text (text ( text ( text (text) text) text) text) text)". This portion of the regular expression is created in code using a user specified depth. For testing with well known test suites, a nesting depth of 1 was necessary (meaning the control is set to 2). In the real world, you would most likely set the control to 0 or 1 - it's your choice.
 
 CONSTRUCTION
 
