@@ -1,0 +1,42 @@
+# ctext = %d33-39 / %d42-91 / %d93-126
+# [\x21-\x27\x2a-\x5b\x5d-\x7e]
+# (?: [\x21-\x27\x2a-\x5a\x5e-\x7e]  | \x5b | \x5d )
+
+# ccontent = ctext / quoted-pair / comment
+# (?: [\x21-\x27\x2a-\x5b\x5d-\x7e] | (?: \\ [\x21-\x7e\x20\x09] ) | comment )
+# (?: [\x21-\x27\x2a-\x5a\x5e-\x7e] | \x5b | \x5d | (?: \\ (?: \x09 | [\x20-\x7e] ) ) | comment )
+
+# CMNT sustitution lets us make this recursive, to some level by extending the regEx (substitution will be "| comment", recursively applied to some level)
+# (?: (?: [\x21-\x27\x2a-\x5a\x5e-\x7e] | \x5b | \x5d | (?: \\ (?: \x09 | [\x20-\x7e] ) ) CMNT ) # CMNT is nil or "| <more text>"
+
+# RFC5322 3.2.2: Folding White Space and Comments
+# FWS = ([*WSP CRLF] 1*WSP)
+# (?: (?: [\x20\x09]* \x0d\x0a )? (?:\x20\|\x09)+ )
+# FWS
+
+# comment = "(" *([FWS] ccontent) [FWS] ")" (from RFC-5322.txt)
+# (?: \( (?: FWS? ccontent )* FWS? \) )
+
+(CG 
+  \( 
+    (?: 
+      (?: 
+        FWS?
+        (?: [\x21-\x27\x2a-\x5a\x5e-\x7e] | \x5b | \x5d | (?: \\ (?: \x09 | [\x20-\x7e] )) CMNT ) # ccontent
+      )*
+      FWS?
+    )
+  \)
+)
+
+.
+
+# use for testing
+
+(CG 
+  \( 
+    (?: X CMNT )*
+  \)
+)
+.
+

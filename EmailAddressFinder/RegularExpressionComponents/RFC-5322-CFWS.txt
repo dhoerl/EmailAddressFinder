@@ -1,0 +1,22 @@
+# CFWS translates into Comment and/or FWS (Folding White Space)
+# CG is replace with an empty string or "?:" depending in whether you want capture groups or not
+
+(?: (?: (?: FWS? CMNT )+ FWS? ) | FWS )
+
+.
+
+# How we got there...
+# CWFS = (1*([FWS] comment) [FWS]) / FWS
+# (?: (?: (?: FWS? CMNT)+ FWS? ) | FWS )
+
+(?: 
+  (?:
+    (?:
+      FWS?
+      CMNT # comment - see RFC-5322-Comment
+    )+
+    FWS?
+  )
+  |
+  FWS
+)

@@ -1,0 +1,80 @@
+# put anything you want in the file, to test pieces of regular expressions
+.
+
+(CG
+  (?:
+    # CFWS? # moved to top of expression
+    (?:
+      (?:
+        (?:
+          [-A-Za-z0-9!#$%&'*+/=?^_`{|}~]+  # atext
+        ) # atom
+      | 
+      (?:
+        " 
+        (?: 
+          (?:
+            (?: 
+              (CG (?: (?: \x09 | \x20 )* \x0d\x0a )? (?: \x09 | \x20 )+ )? 
+              (?: (?: [\x21\x23-\x5a\x5e-\x7e] | \x5b | \x5d ) | (?: \\ (?: \x09 | [\x20-\x7e] ) ) ) # qcontent
+            )+ 
+            (?: 
+              (?: (?: \x09 | \x20 )* \x0d\x0a )? (?: \x09 | \x20 )+ 
+            )?
+          )
+          | 
+          (CG (?: (?: \x09 | \x20 )* \x0d\x0a )? (?: \x09 | \x20 )+ )
+        )
+        "
+      ) # quoted string (?: CFWS? " (?: (?: (?: FWS? qcontent )+ FWS? ) | FWS ) " )
+    )
+    (CG (?: (?: \x09 | \x20 )* \x0d\x0a )? (?: \x09 | \x20 )+ )
+  )+
+) # display name
+
+.
+
+(CG
+  (?:
+    # CFWS? # moved to top of expression
+    (?:
+      (?:
+        [-A-Za-z0-9!#$%&'*+/=?^_`{|}~]+  # atext
+      ) # atom
+      | 
+      (?:
+        " 
+        (?: 
+          (?:
+            (?: 
+              (CG (?: (?: \x09 | \x20 )* \x0d\x0a )? (?: \x09 | \x20 )+ )? 
+              (?: (?: [\x21\x23-\x5a\x5e-\x7e] | \x5b | \x5d ) | (?: \\ (?: \x09 | [\x20-\x7e] ) ) ) # qcontent
+            )+ 
+            (?: 
+              (?: (?: \x09 | \x20 )* \x0d\x0a )? (?: \x09 | \x20 )+ 
+            )?
+          )
+          | 
+          (CG (?: (?: \x09 | \x20 )* \x0d\x0a )? (?: \x09 | \x20 )+ )
+        )
+        "
+      ) # quoted string (?: CFWS? " (?: (?: (?: FWS? qcontent )+ FWS? ) | FWS ) " )
+    )
+    CFWS?
+  )+
+) # display name
+
+.
+
+(CG 
+  \(
+    (?:
+      [A-Z]+
+      CMNT
+    )
+  \)
+)
+.
+
+
+

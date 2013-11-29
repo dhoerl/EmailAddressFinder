@@ -1,0 +1,11 @@
+# See RFC-5322.txt Expansion 6
+CFWS?
+(?:
+  ADDR-SPEC
+  |
+  (?:
+    DISPLAY_NAME
+    ANGLE_ADDR
+  )
+)
+CFWS?

@@ -1,0 +1,75 @@
+# Based on http://jmrware.com/articles/2009/uri_regexp/URI_regex.html but with more restrictive numbering (no leading 0s etc)
+# HEX_NUM defined as "[1-9A-Fa-f](?:[0-9A-Fa-f]{0,3})" and replaced in code, modify as you see fit
+
+IPv6:
+(?:
+  (?:
+    (?:                                      (?:HEX_NUM:){6}
+      | (?:                               :: (?:HEX_NUM:){4})
+      | (?:(?:                  HEX_NUM)? :: (?:HEX_NUM:){3})
+      | (?:(?:(?:HEX_NUM:){0,1} HEX_NUM)? :: (?:HEX_NUM:){2})
+      | (?:(?:(?:HEX_NUM:){0,2} HEX_NUM)? :: (?:HEX_NUM:){1})
+      | (?:   (?:HEX_NUM:){0,3} HEX_NUM)? ::
+    )
+    (?:
+      (?: (?:HEX_NUM) : (?:HEX_NUM) )
+      | 
+      (?: (?: (?: [0-9] | (?: [1-9][0-9] ) | (?: 1[0-9][0-9] ) | (?: 2[0-4][0-9] ) |  (?: 25[0-5] ) ) \. ){3} (?: [0-9] | (?: [1-9][0-9] ) | (?: 1[0-9][0-9] ) | (?: 2[0-4][0-9] ) |  (?: 25[0-5] ) ) ) # IPv4 DFH
+    )
+  )
+  |
+  (?:
+    (?: (?:HEX_NUM:){0,4} HEX_NUM )?
+    ::
+    HEX_NUM
+  )
+  |
+  (?:
+    (?: (?:HEX_NUM:){0,5} HEX_NUM)?
+    ::
+  )
+)
+
+.
+
+(?:
+  [1-9A-Fa-f]
+  (?:
+    (?:[0-9A-Fa-f])
+    |
+    (?:[0-9A-Fa-f]{2})
+    |
+    (?:[0-9A-Fa-f]{3})
+  )
+)
+.
+
+# Per Jeff Robeson: [0-9A-Fa-f]{1,4}, but this causes tre/Mac regex problems
+# This is actually more precise, no leading 0s
+
+# Use this for smaller expression, but has issues with TRE regex (used by OSX)
+# [0-9A-Fa-f]{1,4} # note that this allows leading 0s
+# .  # single period stops reading, so below will not be processed
+(?:
+  [1-9A-Fa-f]
+  |
+  (?:[1-9A-Fa-f][0-9A-Fa-f])
+  |
+  (?:[1-9A-Fa-f][0-9A-Fa-f][0-9A-Fa-f])
+  |
+  (?:[1-9A-Fa-f][0-9A-Fa-f][0-9A-Fa-f][0-9A-Fa-f])
+)
+
+.
+
+# a smaller solution than above, does not allow leading 0s, but again will not work with TRE
+
+(?:
+  [1-9A-Fa-f]
+  |
+  (?:[1-9A-Fa-f][0-9A-Fa-f])
+  |
+  (?:[1-9A-Fa-f](?:[0-9A-Fa-f]{2}))
+  |
+  (?:[1-9A-Fa-f](?:[0-9A-Fa-f]{3}))
+)

@@ -1,0 +1,9 @@
+# Copy and pasted from RFC-5322.txt
+
+(?:
+  (CG < )
+  CFWS?
+  ADDR-SPEC
+  CFWS?
+  (CG > )
+) # angle-addr

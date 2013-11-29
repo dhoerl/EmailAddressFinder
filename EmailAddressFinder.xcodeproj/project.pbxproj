@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		DE1A5C0E177DCFAA0094CED6 /* tests-iamcal.xml in Resources */ = {isa = PBXBuildFile; fileRef = DE1A5C0D177DCFAA0094CED6 /* tests-iamcal.xml */; };
+		DE30C7F917A7F404005AB2BD /* ColorView.m in Sources */ = {isa = PBXBuildFile; fileRef = DE30C7F817A7F404005AB2BD /* ColorView.m */; };
 		DE5B16A316FA1797008D134B /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DE5B16A216FA1797008D134B /* Cocoa.framework */; };
 		DE5B16AD16FA1797008D134B /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = DE5B16AB16FA1797008D134B /* InfoPlist.strings */; };
 		DE5B16AF16FA1797008D134B /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = DE5B16AE16FA1797008D134B /* main.m */; };
@@ -14,16 +16,48 @@
 		DE5B16B616FA1797008D134B /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = DE5B16B516FA1797008D134B /* AppDelegate.m */; };
 		DE5B16B916FA1797008D134B /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = DE5B16B716FA1797008D134B /* MainMenu.xib */; };
 		DE5B16C216FA1864008D134B /* EmailSearcher.m in Sources */ = {isa = PBXBuildFile; fileRef = DE5B16C116FA1864008D134B /* EmailSearcher.m */; };
-		DE5B16C416FA1883008D134B /* Regex1.txt in Resources */ = {isa = PBXBuildFile; fileRef = DE5B16C316FA1883008D134B /* Regex1.txt */; };
-		DE5B16C616FA189A008D134B /* Regex2.txt in Resources */ = {isa = PBXBuildFile; fileRef = DE5B16C516FA189A008D134B /* Regex2.txt */; };
 		DE5B16D016FA2B22008D134B /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = DE5B16CF16FA2B22008D134B /* README.md */; };
 		DE5B16D416FB3628008D134B /* TheWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = DE5B16D216FB3628008D134B /* TheWindowController.m */; };
 		DE5B16D516FB3628008D134B /* TheWindowController.xib in Resources */ = {isa = PBXBuildFile; fileRef = DE5B16D316FB3628008D134B /* TheWindowController.xib */; };
-		DE5B174516FD13C1008D134B /* Mailto.txt in Resources */ = {isa = PBXBuildFile; fileRef = DE5B174416FD13C1008D134B /* Mailto.txt */; };
 		DE5B174716FD1CD3008D134B /* TODO.txt in Resources */ = {isa = PBXBuildFile; fileRef = DE5B174616FD1CD3008D134B /* TODO.txt */; };
+		DE72F5421790AC96008CC151 /* TestRegExWithExternalFiles.m in Sources */ = {isa = PBXBuildFile; fileRef = DE72F5411790AC96008CC151 /* TestRegExWithExternalFiles.m */; };
+		DE72F5431790ACB7008CC151 /* TestForFailure.txt in Resources */ = {isa = PBXBuildFile; fileRef = DEB43CBC1775F57A0057DEDD /* TestForFailure.txt */; };
+		DE72F5441790ACBA008CC151 /* TestForSuccess.txt in Resources */ = {isa = PBXBuildFile; fileRef = DEB43CBA1775F5620057DEDD /* TestForSuccess.txt */; };
+		DE72F5451790ACC1008CC151 /* tests-iamcal.xml in Resources */ = {isa = PBXBuildFile; fileRef = DE1A5C0D177DCFAA0094CED6 /* tests-iamcal.xml */; };
+		DE72F5461790ACC5008CC151 /* tests-original.xml in Resources */ = {isa = PBXBuildFile; fileRef = DE75B1431779F3A90056E03F /* tests-original.xml */; };
+		DE72F5471790ACC8008CC151 /* tests.xml in Resources */ = {isa = PBXBuildFile; fileRef = DE75B1441779F3A90056E03F /* tests.xml */; };
+		DE72F5481790B154008CC151 /* TBXML.m in Sources */ = {isa = PBXBuildFile; fileRef = DE75B1B7177A1AB00056E03F /* TBXML.m */; };
+		DE72F54A1790BB4A008CC151 /* HTMLDecode.m in Sources */ = {isa = PBXBuildFile; fileRef = DE75B1C0177A25DA0056E03F /* HTMLDecode.m */; };
+		DE72F54D1794416A008CC151 /* RegExBuilder.m in Sources */ = {isa = PBXBuildFile; fileRef = DE72F54C1794416A008CC151 /* RegExBuilder.m */; };
+		DE75B1451779F3A90056E03F /* tests-original.xml in Resources */ = {isa = PBXBuildFile; fileRef = DE75B1431779F3A90056E03F /* tests-original.xml */; };
+		DE75B1461779F3A90056E03F /* tests.xml in Resources */ = {isa = PBXBuildFile; fileRef = DE75B1441779F3A90056E03F /* tests.xml */; };
+		DE75B1B3177A152C0056E03F /* EmailSearcher.m in Sources */ = {isa = PBXBuildFile; fileRef = DE5B16C116FA1864008D134B /* EmailSearcher.m */; };
+		DE75B1BE177A1AB00056E03F /* TBXML.m in Sources */ = {isa = PBXBuildFile; fileRef = DE75B1B7177A1AB00056E03F /* TBXML.m */; };
+		DE75B1C1177A25DA0056E03F /* HTMLDecode.m in Sources */ = {isa = PBXBuildFile; fileRef = DE75B1C0177A25DA0056E03F /* HTMLDecode.m */; };
+		DE75B1C4177A2B740056E03F /* TestRegex.txt in Resources */ = {isa = PBXBuildFile; fileRef = DE75B1C3177A2B730056E03F /* TestRegex.txt */; };
+		DEB43C721775F35C0057DEDD /* PrintMe.txt in Resources */ = {isa = PBXBuildFile; fileRef = DEB43C711775F35C0057DEDD /* PrintMe.txt */; };
+		DEB43CAA1775F5100057DEDD /* SenTestingKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DEB43C931775F4BB0057DEDD /* SenTestingKit.framework */; };
+		DEB43CAB1775F5100057DEDD /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DE5B16A216FA1797008D134B /* Cocoa.framework */; };
+		DEB43CB21775F5100057DEDD /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = DEB43CB01775F5100057DEDD /* InfoPlist.strings */; };
+		DEB43CB51775F5100057DEDD /* EmailVerification.m in Sources */ = {isa = PBXBuildFile; fileRef = DEB43CB41775F5100057DEDD /* EmailVerification.m */; };
+		DEB43CBB1775F5620057DEDD /* TestForSuccess.txt in Resources */ = {isa = PBXBuildFile; fileRef = DEB43CBA1775F5620057DEDD /* TestForSuccess.txt */; };
+		DEB43CBD1775F57A0057DEDD /* TestForFailure.txt in Resources */ = {isa = PBXBuildFile; fileRef = DEB43CBC1775F57A0057DEDD /* TestForFailure.txt */; };
+		DEF0FAC0184902F000A24442 /* RFC-5321-IPv6.txt in Resources */ = {isa = PBXBuildFile; fileRef = DEF0FAB4184902F000A24442 /* RFC-5321-IPv6.txt */; };
+		DEF0FAC1184902F000A24442 /* RFC-5322-Addr-Spec.txt in Resources */ = {isa = PBXBuildFile; fileRef = DEF0FAB5184902F000A24442 /* RFC-5322-Addr-Spec.txt */; };
+		DEF0FAC2184902F000A24442 /* RFC-5322-Angle-Addr.txt in Resources */ = {isa = PBXBuildFile; fileRef = DEF0FAB6184902F000A24442 /* RFC-5322-Angle-Addr.txt */; };
+		DEF0FAC3184902F000A24442 /* RFC-5322-CFWS.txt in Resources */ = {isa = PBXBuildFile; fileRef = DEF0FAB7184902F000A24442 /* RFC-5322-CFWS.txt */; };
+		DEF0FAC4184902F000A24442 /* RFC-5322-Comment.txt in Resources */ = {isa = PBXBuildFile; fileRef = DEF0FAB8184902F000A24442 /* RFC-5322-Comment.txt */; };
+		DEF0FAC5184902F000A24442 /* RFC-5322-Display-Name.txt in Resources */ = {isa = PBXBuildFile; fileRef = DEF0FAB9184902F000A24442 /* RFC-5322-Display-Name.txt */; };
+		DEF0FAC6184902F000A24442 /* RFC-5322-FWS.txt in Resources */ = {isa = PBXBuildFile; fileRef = DEF0FABA184902F000A24442 /* RFC-5322-FWS.txt */; };
+		DEF0FAC7184902F000A24442 /* RFC-5322-Mailbox.txt in Resources */ = {isa = PBXBuildFile; fileRef = DEF0FABB184902F000A24442 /* RFC-5322-Mailbox.txt */; };
+		DEF0FAC8184902F000A24442 /* RFC-5322.txt in Resources */ = {isa = PBXBuildFile; fileRef = DEF0FABC184902F000A24442 /* RFC-5322.txt */; };
+		DEF0FAC9184902F000A24442 /* Test.txt in Resources */ = {isa = PBXBuildFile; fileRef = DEF0FABD184902F000A24442 /* Test.txt */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		DE1A5C0D177DCFAA0094CED6 /* tests-iamcal.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = "tests-iamcal.xml"; sourceTree = "<group>"; };
+		DE30C7F717A7F403005AB2BD /* ColorView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ColorView.h; sourceTree = "<group>"; };
+		DE30C7F817A7F404005AB2BD /* ColorView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ColorView.m; sourceTree = "<group>"; };
 		DE5B169F16FA1797008D134B /* EmailAddressFinder.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = EmailAddressFinder.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DE5B16A216FA1797008D134B /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
 		DE5B16A516FA1797008D134B /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
@@ -36,16 +70,51 @@
 		DE5B16B416FA1797008D134B /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		DE5B16B516FA1797008D134B /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		DE5B16B816FA1797008D134B /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/MainMenu.xib; sourceTree = "<group>"; };
-		DE5B16C016FA1864008D134B /* EmailSearcher.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EmailSearcher.h; sourceTree = "<group>"; };
+		DE5B16C016FA1864008D134B /* EmailSearcher.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = EmailSearcher.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
 		DE5B16C116FA1864008D134B /* EmailSearcher.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EmailSearcher.m; sourceTree = "<group>"; };
-		DE5B16C316FA1883008D134B /* Regex1.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Regex1.txt; sourceTree = "<group>"; };
-		DE5B16C516FA189A008D134B /* Regex2.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Regex2.txt; sourceTree = "<group>"; };
 		DE5B16CF16FA2B22008D134B /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.md; sourceTree = "<group>"; };
 		DE5B16D116FB3628008D134B /* TheWindowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TheWindowController.h; sourceTree = "<group>"; };
-		DE5B16D216FB3628008D134B /* TheWindowController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TheWindowController.m; sourceTree = "<group>"; };
+		DE5B16D216FB3628008D134B /* TheWindowController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = TheWindowController.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		DE5B16D316FB3628008D134B /* TheWindowController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TheWindowController.xib; sourceTree = "<group>"; };
-		DE5B174416FD13C1008D134B /* Mailto.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Mailto.txt; sourceTree = "<group>"; };
 		DE5B174616FD1CD3008D134B /* TODO.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = TODO.txt; sourceTree = "<group>"; };
+		DE72F5401790AC96008CC151 /* TestRegExWithExternalFiles.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestRegExWithExternalFiles.h; sourceTree = "<group>"; };
+		DE72F5411790AC96008CC151 /* TestRegExWithExternalFiles.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TestRegExWithExternalFiles.m; sourceTree = "<group>"; };
+		DE72F54B1794416A008CC151 /* RegExBuilder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = RegExBuilder.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
+		DE72F54C1794416A008CC151 /* RegExBuilder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = RegExBuilder.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
+		DE75B1431779F3A90056E03F /* tests-original.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = "tests-original.xml"; sourceTree = "<group>"; };
+		DE75B1441779F3A90056E03F /* tests.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = tests.xml; sourceTree = "<group>"; };
+		DE75B1B5177A1AB00056E03F /* TBXML+Compression.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "TBXML+Compression.m"; sourceTree = "<group>"; };
+		DE75B1B6177A1AB00056E03F /* TBXML+HTTP.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "TBXML+HTTP.m"; sourceTree = "<group>"; };
+		DE75B1B7177A1AB00056E03F /* TBXML.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TBXML.m; sourceTree = "<group>"; };
+		DE75B1B9177A1AB00056E03F /* TBXML+Compression.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "TBXML+Compression.h"; sourceTree = "<group>"; };
+		DE75B1BA177A1AB00056E03F /* TBXML+HTTP.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "TBXML+HTTP.h"; sourceTree = "<group>"; };
+		DE75B1BB177A1AB00056E03F /* TBXML.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TBXML.h; sourceTree = "<group>"; };
+		DE75B1BF177A25DA0056E03F /* HTMLDecode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HTMLDecode.h; sourceTree = "<group>"; };
+		DE75B1C0177A25DA0056E03F /* HTMLDecode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = HTMLDecode.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
+		DE75B1C3177A2B730056E03F /* TestRegex.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = TestRegex.txt; sourceTree = "<group>"; };
+		DEB43C711775F35C0057DEDD /* PrintMe.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = PrintMe.txt; sourceTree = "<group>"; };
+		DEB43C931775F4BB0057DEDD /* SenTestingKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SenTestingKit.framework; path = Library/Frameworks/SenTestingKit.framework; sourceTree = DEVELOPER_DIR; };
+		DEB43CA91775F5100057DEDD /* EmailVerification.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = EmailVerification.octest; sourceTree = BUILT_PRODUCTS_DIR; };
+		DEB43CAF1775F5100057DEDD /* EmailVerification-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "EmailVerification-Info.plist"; sourceTree = "<group>"; };
+		DEB43CB11775F5100057DEDD /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		DEB43CB31775F5100057DEDD /* EmailVerification.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = EmailVerification.h; sourceTree = "<group>"; };
+		DEB43CB41775F5100057DEDD /* EmailVerification.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = EmailVerification.m; sourceTree = "<group>"; };
+		DEB43CB61775F5100057DEDD /* EmailVerification-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "EmailVerification-Prefix.pch"; sourceTree = "<group>"; };
+		DEB43CBA1775F5620057DEDD /* TestForSuccess.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = TestForSuccess.txt; sourceTree = "<group>"; };
+		DEB43CBC1775F57A0057DEDD /* TestForFailure.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = TestForFailure.txt; sourceTree = "<group>"; };
+		DEF0FAB2184902F000A24442 /* Regex1.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Regex1.txt; sourceTree = "<group>"; };
+		DEF0FAB3184902F000A24442 /* Regex2.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Regex2.txt; sourceTree = "<group>"; };
+		DEF0FAB4184902F000A24442 /* RFC-5321-IPv6.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "RFC-5321-IPv6.txt"; sourceTree = "<group>"; };
+		DEF0FAB5184902F000A24442 /* RFC-5322-Addr-Spec.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "RFC-5322-Addr-Spec.txt"; sourceTree = "<group>"; };
+		DEF0FAB6184902F000A24442 /* RFC-5322-Angle-Addr.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "RFC-5322-Angle-Addr.txt"; sourceTree = "<group>"; };
+		DEF0FAB7184902F000A24442 /* RFC-5322-CFWS.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "RFC-5322-CFWS.txt"; sourceTree = "<group>"; };
+		DEF0FAB8184902F000A24442 /* RFC-5322-Comment.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "RFC-5322-Comment.txt"; sourceTree = "<group>"; };
+		DEF0FAB9184902F000A24442 /* RFC-5322-Display-Name.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "RFC-5322-Display-Name.txt"; sourceTree = "<group>"; };
+		DEF0FABA184902F000A24442 /* RFC-5322-FWS.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "RFC-5322-FWS.txt"; sourceTree = "<group>"; };
+		DEF0FABB184902F000A24442 /* RFC-5322-Mailbox.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "RFC-5322-Mailbox.txt"; sourceTree = "<group>"; };
+		DEF0FABC184902F000A24442 /* RFC-5322.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "RFC-5322.txt"; sourceTree = "<group>"; };
+		DEF0FABD184902F000A24442 /* Test.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Test.txt; sourceTree = "<group>"; };
+		DEF0FACA1849039000A24442 /* LICENSE.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = LICENSE.txt; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -57,15 +126,26 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		DEB43CA51775F5100057DEDD /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				DEB43CAA1775F5100057DEDD /* SenTestingKit.framework in Frameworks */,
+				DEB43CAB1775F5100057DEDD /* Cocoa.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
 		DE5B169616FA1797008D134B = {
 			isa = PBXGroup;
 			children = (
-				DE5B174616FD1CD3008D134B /* TODO.txt */,
 				DE5B16CF16FA2B22008D134B /* README.md */,
+				DEF0FACA1849039000A24442 /* LICENSE.txt */,
+				DE5B174616FD1CD3008D134B /* TODO.txt */,
 				DE5B16A816FA1797008D134B /* EmailAddressFinder */,
+				DEB43CAD1775F5100057DEDD /* EmailVerification */,
 				DE5B16A116FA1797008D134B /* Frameworks */,
 				DE5B16A016FA1797008D134B /* Products */,
 			);
@@ -75,6 +155,7 @@
 			isa = PBXGroup;
 			children = (
 				DE5B169F16FA1797008D134B /* EmailAddressFinder.app */,
+				DEB43CA91775F5100057DEDD /* EmailVerification.octest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -83,6 +164,7 @@
 			isa = PBXGroup;
 			children = (
 				DE5B16A216FA1797008D134B /* Cocoa.framework */,
+				DEB43C931775F4BB0057DEDD /* SenTestingKit.framework */,
 				DE5B16A416FA1797008D134B /* Other Frameworks */,
 			);
 			name = Frameworks;
@@ -104,9 +186,14 @@
 				DE5B16B416FA1797008D134B /* AppDelegate.h */,
 				DE5B16B516FA1797008D134B /* AppDelegate.m */,
 				DE5B16B716FA1797008D134B /* MainMenu.xib */,
+				DE72F54B1794416A008CC151 /* RegExBuilder.h */,
+				DE72F54C1794416A008CC151 /* RegExBuilder.m */,
+				DE72F5401790AC96008CC151 /* TestRegExWithExternalFiles.h */,
+				DE72F5411790AC96008CC151 /* TestRegExWithExternalFiles.m */,
 				DE5B16D116FB3628008D134B /* TheWindowController.h */,
 				DE5B16D216FB3628008D134B /* TheWindowController.m */,
 				DE5B16D316FB3628008D134B /* TheWindowController.xib */,
+				DEF0FAB1184902F000A24442 /* RegularExpressionComponents */,
 				DE5B16A916FA1797008D134B /* Supporting Files */,
 			);
 			path = EmailAddressFinder;
@@ -120,6 +207,9 @@
 				DE5B16AE16FA1797008D134B /* main.m */,
 				DE5B16B016FA1797008D134B /* EmailAddressFinder-Prefix.pch */,
 				DE5B16B116FA1797008D134B /* Credits.rtf */,
+				DEB43C711775F35C0057DEDD /* PrintMe.txt */,
+				DE30C7F717A7F403005AB2BD /* ColorView.h */,
+				DE30C7F817A7F404005AB2BD /* ColorView.m */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -129,11 +219,85 @@
 			children = (
 				DE5B16C016FA1864008D134B /* EmailSearcher.h */,
 				DE5B16C116FA1864008D134B /* EmailSearcher.m */,
-				DE5B16C316FA1883008D134B /* Regex1.txt */,
-				DE5B16C516FA189A008D134B /* Regex2.txt */,
-				DE5B174416FD13C1008D134B /* Mailto.txt */,
 			);
 			path = FilesYouNeed;
+			sourceTree = "<group>";
+		};
+		DE75B1B4177A1AB00056E03F /* TBXML-Code */ = {
+			isa = PBXGroup;
+			children = (
+				DE75B1B5177A1AB00056E03F /* TBXML+Compression.m */,
+				DE75B1B6177A1AB00056E03F /* TBXML+HTTP.m */,
+				DE75B1B7177A1AB00056E03F /* TBXML.m */,
+			);
+			path = "TBXML-Code";
+			sourceTree = "<group>";
+		};
+		DE75B1B8177A1AB00056E03F /* TBXML-Headers */ = {
+			isa = PBXGroup;
+			children = (
+				DE75B1B9177A1AB00056E03F /* TBXML+Compression.h */,
+				DE75B1BA177A1AB00056E03F /* TBXML+HTTP.h */,
+				DE75B1BB177A1AB00056E03F /* TBXML.h */,
+			);
+			path = "TBXML-Headers";
+			sourceTree = "<group>";
+		};
+		DE75B1C2177A25E60056E03F /* HTMLDecode */ = {
+			isa = PBXGroup;
+			children = (
+				DE75B1C0177A25DA0056E03F /* HTMLDecode.m */,
+				DE75B1BF177A25DA0056E03F /* HTMLDecode.h */,
+			);
+			name = HTMLDecode;
+			sourceTree = "<group>";
+		};
+		DEB43CAD1775F5100057DEDD /* EmailVerification */ = {
+			isa = PBXGroup;
+			children = (
+				DEB43CB31775F5100057DEDD /* EmailVerification.h */,
+				DEB43CB41775F5100057DEDD /* EmailVerification.m */,
+				DEB43CBC1775F57A0057DEDD /* TestForFailure.txt */,
+				DEB43CBA1775F5620057DEDD /* TestForSuccess.txt */,
+				DE75B1C3177A2B730056E03F /* TestRegex.txt */,
+				DE1A5C0D177DCFAA0094CED6 /* tests-iamcal.xml */,
+				DE75B1431779F3A90056E03F /* tests-original.xml */,
+				DE75B1441779F3A90056E03F /* tests.xml */,
+				DE75B1C2177A25E60056E03F /* HTMLDecode */,
+				DEB43CAE1775F5100057DEDD /* Supporting Files */,
+				DE75B1B4177A1AB00056E03F /* TBXML-Code */,
+				DE75B1B8177A1AB00056E03F /* TBXML-Headers */,
+			);
+			path = EmailVerification;
+			sourceTree = "<group>";
+		};
+		DEB43CAE1775F5100057DEDD /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				DEB43CAF1775F5100057DEDD /* EmailVerification-Info.plist */,
+				DEB43CB01775F5100057DEDD /* InfoPlist.strings */,
+				DEB43CB61775F5100057DEDD /* EmailVerification-Prefix.pch */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		DEF0FAB1184902F000A24442 /* RegularExpressionComponents */ = {
+			isa = PBXGroup;
+			children = (
+				DEF0FAB2184902F000A24442 /* Regex1.txt */,
+				DEF0FAB3184902F000A24442 /* Regex2.txt */,
+				DEF0FAB4184902F000A24442 /* RFC-5321-IPv6.txt */,
+				DEF0FAB5184902F000A24442 /* RFC-5322-Addr-Spec.txt */,
+				DEF0FAB6184902F000A24442 /* RFC-5322-Angle-Addr.txt */,
+				DEF0FAB7184902F000A24442 /* RFC-5322-CFWS.txt */,
+				DEF0FAB8184902F000A24442 /* RFC-5322-Comment.txt */,
+				DEF0FAB9184902F000A24442 /* RFC-5322-Display-Name.txt */,
+				DEF0FABA184902F000A24442 /* RFC-5322-FWS.txt */,
+				DEF0FABB184902F000A24442 /* RFC-5322-Mailbox.txt */,
+				DEF0FABC184902F000A24442 /* RFC-5322.txt */,
+				DEF0FABD184902F000A24442 /* Test.txt */,
+			);
+			path = RegularExpressionComponents;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -155,6 +319,24 @@
 			productName = EmailAddressFinder;
 			productReference = DE5B169F16FA1797008D134B /* EmailAddressFinder.app */;
 			productType = "com.apple.product-type.application";
+		};
+		DEB43CA81775F5100057DEDD /* EmailVerification */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = DEB43CB71775F5100057DEDD /* Build configuration list for PBXNativeTarget "EmailVerification" */;
+			buildPhases = (
+				DEB43CA41775F5100057DEDD /* Sources */,
+				DEB43CA51775F5100057DEDD /* Frameworks */,
+				DEB43CA61775F5100057DEDD /* Resources */,
+				DEB43CA71775F5100057DEDD /* ShellScript */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = EmailVerification;
+			productName = EmailVerification;
+			productReference = DEB43CA91775F5100057DEDD /* EmailVerification.octest */;
+			productType = "com.apple.product-type.bundle";
 		};
 /* End PBXNativeTarget section */
 
@@ -178,6 +360,7 @@
 			projectRoot = "";
 			targets = (
 				DE5B169E16FA1797008D134B /* EmailAddressFinder */,
+				DEB43CA81775F5100057DEDD /* EmailVerification */,
 			);
 		};
 /* End PBXProject section */
@@ -188,18 +371,61 @@
 			buildActionMask = 2147483647;
 			files = (
 				DE5B16AD16FA1797008D134B /* InfoPlist.strings in Resources */,
+				DEF0FAC4184902F000A24442 /* RFC-5322-Comment.txt in Resources */,
+				DEF0FAC3184902F000A24442 /* RFC-5322-CFWS.txt in Resources */,
 				DE5B16B316FA1797008D134B /* Credits.rtf in Resources */,
 				DE5B16B916FA1797008D134B /* MainMenu.xib in Resources */,
-				DE5B16C416FA1883008D134B /* Regex1.txt in Resources */,
-				DE5B16C616FA189A008D134B /* Regex2.txt in Resources */,
 				DE5B16D016FA2B22008D134B /* README.md in Resources */,
 				DE5B16D516FB3628008D134B /* TheWindowController.xib in Resources */,
-				DE5B174516FD13C1008D134B /* Mailto.txt in Resources */,
+				DEF0FAC2184902F000A24442 /* RFC-5322-Angle-Addr.txt in Resources */,
 				DE5B174716FD1CD3008D134B /* TODO.txt in Resources */,
+				DEF0FAC6184902F000A24442 /* RFC-5322-FWS.txt in Resources */,
+				DEF0FAC1184902F000A24442 /* RFC-5322-Addr-Spec.txt in Resources */,
+				DEF0FAC8184902F000A24442 /* RFC-5322.txt in Resources */,
+				DEF0FAC9184902F000A24442 /* Test.txt in Resources */,
+				DEF0FAC7184902F000A24442 /* RFC-5322-Mailbox.txt in Resources */,
+				DEB43C721775F35C0057DEDD /* PrintMe.txt in Resources */,
+				DE72F5431790ACB7008CC151 /* TestForFailure.txt in Resources */,
+				DE72F5441790ACBA008CC151 /* TestForSuccess.txt in Resources */,
+				DE72F5451790ACC1008CC151 /* tests-iamcal.xml in Resources */,
+				DEF0FAC5184902F000A24442 /* RFC-5322-Display-Name.txt in Resources */,
+				DE72F5461790ACC5008CC151 /* tests-original.xml in Resources */,
+				DE72F5471790ACC8008CC151 /* tests.xml in Resources */,
+				DEF0FAC0184902F000A24442 /* RFC-5321-IPv6.txt in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		DEB43CA61775F5100057DEDD /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				DEB43CB21775F5100057DEDD /* InfoPlist.strings in Resources */,
+				DEB43CBB1775F5620057DEDD /* TestForSuccess.txt in Resources */,
+				DEB43CBD1775F57A0057DEDD /* TestForFailure.txt in Resources */,
+				DE75B1451779F3A90056E03F /* tests-original.xml in Resources */,
+				DE75B1461779F3A90056E03F /* tests.xml in Resources */,
+				DE75B1C4177A2B740056E03F /* TestRegex.txt in Resources */,
+				DE1A5C0E177DCFAA0094CED6 /* tests-iamcal.xml in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		DEB43CA71775F5100057DEDD /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# Run the unit tests in this test bundle.\n\"${SYSTEM_DEVELOPER_DIR}/Tools/RunUnitTests\"\n";
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		DE5B169B16FA1797008D134B /* Sources */ = {
@@ -210,6 +436,22 @@
 				DE5B16B616FA1797008D134B /* AppDelegate.m in Sources */,
 				DE5B16C216FA1864008D134B /* EmailSearcher.m in Sources */,
 				DE5B16D416FB3628008D134B /* TheWindowController.m in Sources */,
+				DE72F5421790AC96008CC151 /* TestRegExWithExternalFiles.m in Sources */,
+				DE72F5481790B154008CC151 /* TBXML.m in Sources */,
+				DE72F54A1790BB4A008CC151 /* HTMLDecode.m in Sources */,
+				DE72F54D1794416A008CC151 /* RegExBuilder.m in Sources */,
+				DE30C7F917A7F404005AB2BD /* ColorView.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		DEB43CA41775F5100057DEDD /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				DEB43CB51775F5100057DEDD /* EmailVerification.m in Sources */,
+				DE75B1B3177A152C0056E03F /* EmailSearcher.m in Sources */,
+				DE75B1BE177A1AB00056E03F /* TBXML.m in Sources */,
+				DE75B1C1177A25DA0056E03F /* HTMLDecode.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -238,6 +480,14 @@
 				DE5B16B816FA1797008D134B /* en */,
 			);
 			name = MainMenu.xib;
+			sourceTree = "<group>";
+		};
+		DEB43CB01775F5100057DEDD /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				DEB43CB11775F5100057DEDD /* en */,
+			);
+			name = InfoPlist.strings;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
@@ -326,6 +576,32 @@
 			};
 			name = Release;
 		};
+		DEB43CB81775F5100057DEDD /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				FRAMEWORK_SEARCH_PATHS = "\"$(DEVELOPER_LIBRARY_DIR)/Frameworks\"";
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "EmailVerification/EmailVerification-Prefix.pch";
+				INFOPLIST_FILE = "EmailVerification/EmailVerification-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = octest;
+			};
+			name = Debug;
+		};
+		DEB43CB91775F5100057DEDD /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				FRAMEWORK_SEARCH_PATHS = "\"$(DEVELOPER_LIBRARY_DIR)/Frameworks\"";
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "EmailVerification/EmailVerification-Prefix.pch";
+				INFOPLIST_FILE = "EmailVerification/EmailVerification-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = octest;
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -343,6 +619,15 @@
 			buildConfigurations = (
 				DE5B16BD16FA1797008D134B /* Debug */,
 				DE5B16BE16FA1797008D134B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		DEB43CB71775F5100057DEDD /* Build configuration list for PBXNativeTarget "EmailVerification" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				DEB43CB81775F5100057DEDD /* Debug */,
+				DEB43CB91775F5100057DEDD /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

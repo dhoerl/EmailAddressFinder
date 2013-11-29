@@ -1,0 +1,439 @@
+#
+# Original Attempt at building up the RegEx in one file. It just got too complicated, particularlly with options.
+# That said, its mostly what was used and since its in one place its more readable.
+# IMPORTANT!!!
+#
+# NOTE: this file is no longer used to create regular expressions. Portions were copied to other files all of which beging with RFC-5322...
+#
+
+# From RFC-5234 (RegEx'd)
+# ALPHA     [A-Za-z]
+# CR        \x0d -> \r
+# LF        \x0a -> \n
+# CRLF      \x0d\x0a -> \r\n
+# DIGIT     [0-9]
+# DQUOTE    "
+# SP        \x20
+# HTAB      \x09
+# VCHAR     [\x21-\x7e] -> [!-~]
+# WSP       [\x09\x20] -> (?: \x09 | \x20 )
+# specials = "(" / ")" / "<" / ">" / "[" / "]" / ":" / ";" / "@" / "\" / "," / "." / DQUOTE # unused, for referernce
+
+# RFC5322 3.2.2: Folding White Space and Comments
+# FWS = ([*WSP CRLF] 1*WSP)
+# (?: (?: (?: \x09 | \x20 )* \x0d\x0a )? (?: \x09 | \x20 )+ )
+
+# comment see RFC-5322-Comment.txt
+
+# RFC5322 3.2.3: Atoms
+# atext = ALPHA / DIGIT / "!" / "#" / "$" / "%" / "&" / "’" / "*" / "+" / "-" / "/" / "=" / "?" / "^" / "_" / "‘" / "{" / "|" / "}" / " ̃"
+# [-A-Za-z0-9!#$%&'*+/=?^_`{|}~]
+
+# atom = [CFWS] 1*atext [CFWS]
+# (?: CFSW? atext+ CWFS? )
+
+# dot-atom-text = 1*atext *("." 1*atext)
+# (?: atext+ (?: \. atext+ )*
+# (?: [-A-Za-z0-9!#$%&'*+/=?^_`{|}~]+ (?: \. [-A-Za-z0-9!#$%&'*+/=?^_`{|}~]+ )* )
+
+# dot-atom = [CFWS] dot-atom-text [CFWS]
+# (?: CFSW? dot-atom-text CFSW? )
+# (?: CFSW? (?: [-A-Za-z0-9!#$%&'*+/=?^_`{|}~]+ (?: \. [-A-Za-z0-9!#$%&'*+/=?^_`{|}~]+ )* ) CFSW? )
+# see bottom for full expansion
+
+# RFC5322 3.2.4: Quoted Strings
+# qtext = %d33 / %d35-91 / %d93-126
+# (?: [\x21\x23-\x5a\x5e-\x7e] | \x5b | \x5d )
+
+# quoted-string = [CFWS] DQUOTE ((1*([FWS] qcontent) [FWS]) / FWS) DQUOTE # Errata 3135
+# (?: CFWS? " (?: (?: (?: FWS? qcontent )+ FWS? ) | FWS ) " )
+# see bottom for full expansion
+
+# RFC5322 3.2.5: Miscellaneous Tokens
+# word = atom / quoted-string
+# (?: (?: atom ) | (?: quoted-string ) )
+# (?: (?:  [CFWS] 1*atext [CFWS] ) | (?: quoted-string )
+# (?: (?:  CFWS? (?:  atext )+  CFWS? ) | (?: quoted-string ) )
+
+# phrase = 1*word
+# (?: (?:  CFWS? (?:  atext )+  CFWS? ) | (?: quoted-string ) )+
+# see expansion at bottom
+
+
+# RFC5322 3.4.1: Addr-Spec Specification
+# addr-spec = local-part "@" domain
+# local-part = dot-atom / quoted-string
+# domain = dot-atom / domain-literal
+
+# dtext = %d33-90 / %d94-126
+# [\x21-\x5a\x5e-\x7e]
+
+# domain-literal = [CFWS] "[" *([FWS] dtext) [FWS] "]" [CFWS]
+# (?: CWFS? \[ (?: FWS? dtext ) \] CFWS? )
+# (?: CWFS? \[ (?: FWS? [\x21-\x5a\x5e-\x7e] )* FWS? \] CFWS? )
+# (?: CWFS? \[ (?: (?: (?: (?: \x09 | \x20 )* \x0d\x0a )? [\x21-\x5a\x5e-\x7e] )* (?: (?: \x09 | \x20 )* \x0d\x0a )? ) \] CFWS? )
+# see expansion at bottom
+
+# addr-spec = local-part "@" domain
+# local-part = dot-atom / quoted-string
+# (?:  dot-atom | quoted-string )
+
+# RFC5322 3.4: Address Specification
+# mailbox = name-addr / addr-spec
+# name-addr = [display-name] angle-addr
+# angle-addr = CWFS? "<" addr-spec ">" CWFS?
+# display-name = phrase
+
+(?:
+  CFWS?
+  (
+    # CFWS? - move up top
+    (?:
+      dot-atom-no-cfws
+      |
+      quoted-string-no-cfws
+    )
+    CFWS? # disputed
+    @
+    CFWS? # disputed
+    (?:
+      dot-atom-no-cfws
+      |
+      domain-literal-no-cfws
+    )  # domain
+    # CFWS? - move to bottom
+  ) # addr-spec-no-cfws
+  |
+  (?:
+    # CFWS? # pulled from display_name and before "<", but now at top
+    (?: 
+      (?: (?:  atext-no-cfws-at_start )+ | (?: quoted-string-no-cfws-at_start ) ) # must have one
+      (?:
+        CFWS
+        (?: (?:  atext-no-cfws-at_start )+ | (?: quoted-string-no-cfws-at_start ) ) # must have one
+      ) *
+      CFWS?
+    )? # display_name-no-cfws-at_start (phrase)
+    (?:
+      # was CFWS?
+      < 
+      CFWS?
+      addr-spec-no-cfws # CFWS at start and finish
+      CFWS?
+      >
+    ) # angle-addr
+    # CFWS? - move to bottom
+  ) # name-addr-no-cfws
+  CFWS?
+) # mailbox
+# Expansion 7 - re-arrange display-name for more efficient regex (CFWS now 10/6)
+
+(?:
+  CFWS?
+  (
+    # CFWS? - move up top
+    (?:
+      dot-atom-no-cfws
+      |
+      quoted-string-no-cfws
+    )
+    CFWS? # disputed
+    @
+    CFWS? # disputed
+    (?:
+      dot-atom-no-cfws
+      |
+      domain-literal-no-cfws
+    )  # domain
+    # CFWS? - move to bottom
+  ) # addr-sepc-no-cfws
+  |
+  (?:
+    # CFWS? # pulled from display_name and before "<", but now at top
+    (?: 
+      (?: (?: (?: (?:  atext-no-cfws-at_start )+ ) | (?: quoted-string-no-cfws-at_start ) ) CFWS? )+ # 1*word, quoted-string bracketed by CFWS
+    )? # display_name-no-cfws-at_start (phrase)
+    (?:
+      # was CFWS?
+      < 
+      CFWS?
+      addr-spec-no-cfws # CFWS at start and finish
+      CFWS?
+      >
+    ) # angle-addr
+    # CFWS? - move to bottom
+  ) # name-addr-no-cfws
+  CFWS?
+) # mailbox
+# Expansion 6 - aggregate CFWS (was 12/8 instances, now 9/5)
+
+(?:
+  (
+    CFWS?
+    (?:
+      dot-atom
+      |
+      quoted-string
+    )
+    CFWS? # disputed
+    @
+    CFWS? # disputed
+    (?:
+      dot-atom 
+      |
+      domain-literal
+    )  # domain
+    CFWS?
+  ) # addr-sepc
+  |
+  (?:
+    CFWS? # pulled from display_name and before "<"
+    (?: 
+      (?: (?: (?: (?:  atext )+ ) | (?: quoted-string-no-cfws ) ) CFWS? )+ # 1*word, quoted-string bracketed by CFWS
+    )? # display name (phrase)
+    (?:
+      CFWS?
+      < 
+      CFWS?
+      addr-spec-no-cfws # CFWS at start and finish
+      CFWS?
+      >
+    ) # angle-addr
+    CFWS?
+  ) # name-addr
+) # mailbox
+# Expansion 5 - start aggregating 12 instances of CFWS
+
+(?:
+  (
+    CFWS?
+    (?:
+      dot-atom
+      |
+      quoted-string
+    )
+    CFWS? # disputed
+    @
+    CFWS? # disputed
+    (?:
+      dot-atom 
+      |
+      domain-literal
+    )  # domain
+    CFWS?
+  ) # addr-spec
+  |
+  (?:
+    (?: 
+      (?: (?: (?: (?:  atext )+ ) | (?: quoted-string-no-cfws ) ) CFWS? )+ # 1*word, quoted-string bracketed by CFWS
+    )? # display name (phrase)
+    (?:
+      CFWS?
+      < 
+      addr-spec # CFWS at start and finish
+      >
+      CFWS?
+    ) # angle-addr
+  ) # name-addr
+) # mailbox
+# Expansion 4 - expand more terms
+
+(?:
+  (?:
+    CFWS?
+    (?:
+      dot-atom
+      |
+      quoted-string
+    )
+    CFWS? # disputed
+    @
+    CFWS? # disputed
+    (?:
+      dot-atom 
+      |
+      domain-literal
+    )  # domain
+    CFWS?
+  ) # addr-sepc
+  |
+  (?:
+    (?: phrase )? # display name
+    (?:
+      CFWS?
+      < 
+      addr-sepc # CFWS at start and finish
+      >
+      CFWS?
+    ) # angle-addr
+  ) # name-addr
+) # mailbox
+# Expansion 3 - expand some terms
+
+
+(?:
+  (?:
+    CFWS?
+    (?:
+      dot-atom
+      |
+      quoted-string
+    )
+    CFWS? # disputed
+    @
+    CFWS? # disputed
+    domain
+    CFWS?
+  ) # addr-sepc
+  |
+  (?:
+    (?: display-name)?
+    (?:
+      CFWS?
+      < 
+      addr-sepc # CFWS at start and finish
+      >
+      CFWS?
+    ) # angle-addr
+  ) # name-addr
+) # mailbox
+# Expansion 2 - expand some terms
+
+(?:
+  (?:
+    CFWS?
+    local-part 
+    CFWS? # disputed
+    @ 
+    CFWS? # disputed
+    domain
+  ) # addr-sepc
+  |
+  (?:
+    (?: display-name)?
+    (?:
+      CFWS?
+      < 
+      addr-sepc # CFWS at start and finish
+      >
+      CFWS?
+    ) # angle-addr
+  ) # name-addr
+) # mailbox
+# Expansion 1
+
+# (?: name-addr | addr-spec )
+
+(?:
+  addr-spec
+  |
+  name-addr
+) # mailbox
+# Base Form
+
+# -------- sub items
+
+# phrase 
+#(?: (?: CFWS? (?: atext )+  CFWS? ) | quoted-string )+
+
+(?: 
+  (?:
+    (?: (?: (?: (?: (?: (?: \x09 | \x20 )* \x0d\x0a )? (?: \x09 | \x20 )+ )? CMNT )+ (?: (?: (?: \x09 | \x20 )* \x0d\x0a )? (?: \x09 | \x20 )+ )? ) | (?: (?: (?: \x09 | \x20 )* \x0d\x0a )? (?: \x09 | \x20 )+ ) )? # CFWS?
+    [-A-Za-z0-9!#$%&'*+/=?^_`{|}~]+  # atext
+    (?: (?: (?: (?: (?: (?: \x09 | \x20 )* \x0d\x0a )? (?: \x09 | \x20 )+ )? CMNT )+ (?: (?: (?: \x09 | \x20 )* \x0d\x0a )? (?: \x09 | \x20 )+ )? ) | (?: (?: (?: \x09 | \x20 )* \x0d\x0a )? (?: \x09 | \x20 )+ ) )? # CFWS?
+  ) # atext
+  | 
+  (?:
+    (?: (?: (?: (?: (?: (?: \x09 | \x20 )* \x0d\x0a )? (?: \x09 | \x20 )+ )? CMNT )+ (?: (?: (?: \x09 | \x20 )* \x0d\x0a )? (?: \x09 | \x20 )+ )? ) | (?: (?: (?: \x09 | \x20 )* \x0d\x0a )? (?: \x09 | \x20 )+ ) )? # CFWS?
+    " 
+    (?: 
+      (?:
+        (?: 
+          (?: (?: (?: \x09 | \x20 )* \x0d\x0a )? (?: \x09 | \x20 )+ )? 
+          (?: (?: [\x21\x23-\x5a\x5e-\x7e] | \x5b | \x5d ) | (?: \\ (?: \x09 | [\x20-\x7e] ) ) ) # qcontent
+        )+ 
+        (?: 
+          (?: (?: \x09 | \x20 )* \x0d\x0a )? (?: \x09 | \x20 )+ 
+        )?
+      )
+      | 
+      (?: (?: (?: \x09 | \x20 )* \x0d\x0a )? (?: \x09 | \x20 )+ )
+    )
+    " 
+    (?: (?: (?: (?: (?: (?: \x09 | \x20 )* \x0d\x0a )? (?: \x09 | \x20 )+ )? CMNT )+ (?: (?: (?: \x09 | \x20 )* \x0d\x0a )? (?: \x09 | \x20 )+ )? ) | (?: (?: (?: \x09 | \x20 )* \x0d\x0a )? (?: \x09 | \x20 )+ ) ) # CFWS?
+  ) # quoted string (?: CFWS? " (?: (?: (?: FWS? qcontent )+ FWS? ) | FWS ) " )
+)+ # display-name ( phrase )
+
+# dot-atom
+# (?: CFSW? (?: [-A-Za-z0-9!#$%&'*+/=?^_`{|}~]+ (?: \. [-A-Za-z0-9!#$%&'*+/=?^_`{|}~]+ )* ) CFSW? )
+(?: 
+  (?: (?: (?: (?: (?: (?: \x09 | \x20 )* \x0d\x0a )? (?: \x09 | \x20 )+ )? CMNT )+ (?: (?: (?: \x09 | \x20 )* \x0d\x0a )? (?: \x09 | \x20 )+ )? ) | (?: (?: (?: \x09 | \x20 )* \x0d\x0a )? (?: \x09 | \x20 )+ ) )? # CFWS?
+  (?: [-A-Za-z0-9!#$%&'*+/=?^_`{|}~]+ (?: \. [-A-Za-z0-9!#$%&'*+/=?^_`{|}~]+ )* )
+  (?: (?: (?: (?: (?: (?: \x09 | \x20 )* \x0d\x0a )? (?: \x09 | \x20 )+ )? CMNT )+ (?: (?: (?: \x09 | \x20 )* \x0d\x0a )? (?: \x09 | \x20 )+ )? ) | (?: (?: (?: \x09 | \x20 )* \x0d\x0a )? (?: \x09 | \x20 )+ ) )? # CFWS?
+) # dot-atom
+
+
+# RFC5322 3.2.1: Quoted Characters
+# quoted-pair = ("\" (VCHAR / WSP))
+# (?: \\ [\x21-\x7e\x20\x09] )
+# (?: \\ (?: \x09 | [\x20-\x7e] ) )
+
+# qcontent = qtext / quoted-pair
+# (?: (?: [\x21\x23-\x5a\x5e-\x7e] | \x5b | \x5d ) | (?: \\ (?: \x09 | [\x20-\x7e] ) ) ) # qcontent
+
+# quoted-string ERRATA-3135
+# [CFWS] DQUOTE ((1*([FWS] qcontent) [FWS]) / FWS) DQUOTE [CFWS]
+# (?: CFWS? " (?: (?: (?: FWS? qcontent )+ FWS? ) | FWS ) " CFWS?)
+
+(?:
+  (?: (?: (?: (?: (?: (?: \x09 | \x20 )* \x0d\x0a )? (?: \x09 | \x20 )+ )? CMNT )+ (?: (?: (?: \x09 | \x20 )* \x0d\x0a )? (?: \x09 | \x20 )+ )? ) | (?: (?: (?: \x09 | \x20 )* \x0d\x0a )? (?: \x09 | \x20 )+ ) )? # CFWS?
+  " 
+  (?: 
+    (?:
+      (?: 
+        (?: 
+          (?: (?: \x09 | \x20 )* \x0d\x0a )? 
+          (?: \x09 | \x20 )+ 
+        )?  # FWS
+        (?: (?: [\x21\x23-\x5a\x5e-\x7e] | \x5b | \x5d ) | (?: \\ (?: \x09 | [\x20-\x7e] ) ) ) # qcontent
+      )+
+      (?: 
+        (?: (?: \x09 | \x20 )* \x0d\x0a )? 
+        (?: \x09 | \x20 )+ 
+      )?
+    ) # FWS
+    | 
+    (?: 
+      (?: (?: \x09 | \x20 )* \x0d\x0a )? 
+      (?: \x09 | \x20 )+ 
+    ) # FWS
+  )
+  "
+  (?: (?: (?: (?: (?: (?: \x09 | \x20 )* \x0d\x0a )? (?: \x09 | \x20 )+ )? CMNT )+ (?: (?: (?: \x09 | \x20 )* \x0d\x0a )? (?: \x09 | \x20 )+ )? ) | (?: (?: (?: \x09 | \x20 )* \x0d\x0a )? (?: \x09 | \x20 )+ ) )  # CFWS?
+) # quoted string (?: CFWS? " (?: (?: (?: FWS? qcontent )+ FWS? ) | FWS ) " )
+
+# domain-literal
+# (?: CWFS? \[ (?: (?: (?: (?: \x09 | \x20 )* \x0d\x0a )? [\x21-\x5a\x5e-\x7e] )* (?: (?: \x09 | \x20 )* \x0d\x0a )? ) \] CFWS? )
+# with CWFS removed
+
+\[
+(?: (?: FWS? [\x21-\x5a\x5e-\x7e] )* FWS? )
+\]
+) # domain-literal
+
+
+
+RFC-1035 - DOMAIN NAMES - IMPLEMENTATION AND SPECIFICATION - 2.3.1
+
+<label> ::= <letter> [ [ <ldh-str> ] <let-dig> ]
+
+<ldh-str> ::= <let-dig-hyp> | <let-dig-hyp> <ldh-str>
+
+<let-dig-hyp> ::= <let-dig> | "-"
+
+<let-dig> ::= <letter> | <digit>
+
+<letter> ::= any one of the 52 alphabetic characters A through Z in
+upper case and a through z in lower case
+
+<digit> ::= any one of the ten digits 0 through 9
