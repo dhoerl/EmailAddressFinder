@@ -75,6 +75,14 @@ static NSCharacterSet *atSign;
 	BOOL ret = NO;
 	NSUInteger len = [str length];
 
+{
+[_regEx enumerateMatchesInString:str options:NSMatchingReportCompletion | NSMatchingAnchored range:NSMakeRange(0, len) usingBlock:^(NSTextCheckingResult *result, NSMatchingFlags flags, BOOL *stop)
+	{
+		NSLog(@"RESULT[%@]: %@ END_FLAG=%tx", str, result, flags); // &NSMatchingHitEnd
+	} ];
+}
+
+
 	assert(_regEx);
 //NSLog(@"Start[%@]...", str);
 	NSTextCheckingResult *match = [_regEx firstMatchInString:str options:0 range:NSMakeRange(0, len)];

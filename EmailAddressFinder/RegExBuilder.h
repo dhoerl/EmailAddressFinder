@@ -6,6 +6,8 @@
 //  Copyright (c) 2013 dhoerl. All rights reserved.
 //
 
+enum { fwsFull, fwsSpacesTabs, fwsDisplayNameOnly };	// for fullFWS
+
 #define kCommentString		@"commentString"
 #define kMailboxString		@"mailboxString"
 #define kAngleAddrSpec		@"angleAddrSpecString"
@@ -16,12 +18,12 @@
 #define kCommentFWS			@"cfwsString"
 #define kTestString			@"testString"
 #define kCommentLevel		@"nestLevel"	// number
+#define kFWStreatment		@"treatFWS"		// number
 #define kAddrSpecOnly		@"addrSpecOnly"	// boolean number
 #define kPOXIXcompliant		@"posix"		// boolean number
 #define kValidateRegEx		@"validateMode"	// boolean number
 #define kAllowCFWSwithAT	@"allowCFWS"	// boolean number
 #define kCaptureGroups		@"captureGroups"// boolean number
-#define kCompressedFWS		@"compressFWS"	// boolean number
 #define kAllowNullStr		@"allowNullStr"	// boolean number
 #define kUseRFC5321IPV6		@"rfc5321IPV6"	// boolean number
 #define kUseRFC5321Len		@"rfc5321Len"	// boolean number

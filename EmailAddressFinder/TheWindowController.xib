@@ -14,10 +14,13 @@
                 <outlet property="cmntLevelSlider" destination="236" id="243"/>
                 <outlet property="cmntLevelValue" destination="240" id="273"/>
                 <outlet property="complianceOptionsState" destination="289" id="296"/>
-                <outlet property="fullFWS" destination="294" id="306"/>
+                <outlet property="fullFWS" destination="CCO-md-fBa" id="cx9-sx-N3Q"/>
                 <outlet property="interactiveButton" destination="150" id="231"/>
                 <outlet property="optionsForCompliance" destination="258" id="270"/>
                 <outlet property="optionsForValidating" destination="250" id="271"/>
+                <outlet property="pasteString1Button" destination="b0l-K3-7br" id="yLy-It-8Do"/>
+                <outlet property="pasteString2Button" destination="fhh-O9-ASY" id="3cK-qh-wlj"/>
+                <outlet property="pasteTextButton" destination="meg-8W-igr" id="kHK-9o-S7L"/>
                 <outlet property="pasteType" destination="277" id="279"/>
                 <outlet property="posix" destination="280" id="282"/>
                 <outlet property="regExButton" destination="71" id="146"/>
@@ -97,7 +100,7 @@
                                         <rect key="frame" x="1" y="1" width="808" height="124"/>
                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                         <subviews>
-                                            <textView importsGraphics="NO" richText="NO" findStyle="panel" allowsUndo="YES" verticallyResizable="YES" spellingCorrection="YES" smartInsertDelete="YES" id="11">
+                                            <textView importsGraphics="NO" richText="NO" findStyle="panel" allowsUndo="YES" verticallyResizable="YES" id="11">
                                                 <rect key="frame" x="0.0" y="0.0" width="808" height="124"/>
                                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -361,20 +364,8 @@
                                         <action selector="updateUI:" target="-2" id="303"/>
                                     </connections>
                                 </button>
-                                <button id="294">
-                                    <rect key="frame" x="16" y="34" width="331" height="18"/>
-                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                    <string key="toolTip">The ABNF spec for FWS (folding white space) permits "\r\n" pairs along with tabs and spaces—however this is probably overkill when validating addresses. Uncheck to only allow spaces.</string>
-                                    <buttonCell key="cell" type="check" title="Full FWS Spec" bezelStyle="regularSquare" imagePosition="left" inset="2" id="295">
-                                        <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
-                                        <font key="font" metaFont="system"/>
-                                    </buttonCell>
-                                    <connections>
-                                        <action selector="updateUI:" target="-2" id="304"/>
-                                    </connections>
-                                </button>
                                 <button id="TLz-UV-g4e">
-                                    <rect key="frame" x="16" y="12" width="331" height="18"/>
+                                    <rect key="frame" x="16" y="34" width="331" height="18"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                     <string key="toolTip">The current spec permits this. This case is covered in text.xml 43. However, Errata 3522 has been filed against the spec, and is likely to be approved in the future (google RFC-5322 Errata ID: 3135).</string>
                                     <buttonCell key="cell" type="check" title="Permit &quot;&quot; for the local name." bezelStyle="regularSquare" imagePosition="left" inset="2" id="fcW-8s-2OX">
@@ -393,6 +384,28 @@
                                     <rect key="frame" x="820" y="91" width="20" height="20"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMinY="YES"/>
                                 </customView>
+                                <popUpButton toolTip="You can see tips for each item of this control by tapping it to expose the menu, then hovering over each item." verticalHuggingPriority="750" id="CCO-md-fBa">
+                                    <rect key="frame" x="16" y="7" width="317" height="26"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                    <popUpButtonCell key="cell" type="push" title="Full FWS Spec" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" selectedItem="UUA-NB-oki" id="rHd-Cm-UDx">
+                                        <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                        <font key="font" metaFont="system"/>
+                                        <menu key="menu" title="OtherViews" id="u0p-8z-1VG">
+                                            <items>
+                                                <menuItem title="Full FWS Spec" state="on" id="tIe-f1-pCd">
+                                                    <string key="toolTip">The ABNF spec for FWS (folding white space) permits "\r\n" pairs along with tabs and spaces—however this is probably overkill when validating addresses. Uncheck to only allow tabs and spaces.</string>
+                                                </menuItem>
+                                                <menuItem title="FWS Accepts only Tabs and Spaces" id="gwt-XC-Zue">
+                                                    <string key="toolTip">Modify FWS to only accept space and tabs, and exclude "\r\n". This option is provided for compleness and is not anticipated to meet any need.</string>
+                                                </menuItem>
+                                                <menuItem title="FWS of Space and Tab only for &quot;Name-Addr&quot;" toolTip="FWS accepts spaces and tabs only between the Display-Name and '&lt;' . Probably the best choice when validating user input." id="UUA-NB-oki"/>
+                                            </items>
+                                        </menu>
+                                    </popUpButtonCell>
+                                    <connections>
+                                        <action selector="updateUI:" target="-2" id="q1f-pI-W8r"/>
+                                    </connections>
+                                </popUpButton>
                             </subviews>
                         </view>
                         <color key="borderColor" white="0.0" alpha="0.41999999999999998" colorSpace="calibratedWhite"/>

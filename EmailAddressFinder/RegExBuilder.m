@@ -26,7 +26,7 @@
 @property (nonatomic, strong) NSNumber *validateMode;
 @property (nonatomic, strong) NSNumber *allowCFWS;
 @property (nonatomic, strong) NSNumber *captureGroups;
-@property (nonatomic, strong) NSNumber *compressFWS;
+@property (nonatomic, strong) NSNumber *treatFWS;
 @property (nonatomic, strong) NSNumber *allowNullStr;
 @property (nonatomic, strong) NSNumber *rfc5321IPV6;
 @property (nonatomic, strong) NSNumber *rfc5321Len;
@@ -42,7 +42,7 @@
 	NSArray *args;
 	args =  @[
 					kCommentString, kMailboxString, kAngleAddrSpec, kDisplayName, kNameAddress, kIPV6String, kFWS, kCommentFWS, kTestString,
-					kCommentLevel, kAddrSpecOnly, kPOXIXcompliant, kValidateRegEx, kAllowCFWSwithAT, kCaptureGroups, kCompressedFWS,
+					kCommentLevel, kAddrSpecOnly, kPOXIXcompliant, kValidateRegEx, kAllowCFWSwithAT, kCaptureGroups, kFWStreatment,
 					kAllowNullStr, kUseRFC5321IPV6, kUseRFC5321Len
 				];
 	[args enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop)
@@ -122,7 +122,8 @@
 		if(mode == rfcMode) {
 			NSString *str;
 			if([self.addrSpecOnly boolValue]) {
-				str = [NSString stringWithFormat:@"%@%@%@", @"CFWS?", nameAddr, @"CFWS?"];
+				//str = [NSString stringWithFormat:@"%@%@%@", @"CFWS?", nameAddr, @"CFWS?"];
+				str = nameAddr;
 				//NSLog(@"SELECT %@", str);
 			} else {
 				assert([self.mailboxString length]);
@@ -130,7 +131,10 @@
 				assert([self.angleAddrSpecString length]);
 				str = self.mailboxString;
 				str = [str stringByReplacingOccurrencesOfString:@"DISPLAY_NAME" withString:self.dispNameString];
+				str = [str stringByReplacingOccurrencesOfString:@"DISPLAY_NAME_CFWS" withString:self.validateMode ? @"(?:(?:\x20|\x09)+)" : @"CFWS"];	// validate only allowing space at this one point
 				str = [str stringByReplacingOccurrencesOfString:@"ANGLE_ADDR" withString:self.angleAddrSpecString];
+					
+
 				//str = [NSString stringWithFormat:@"CFWS?(?:ADDR-SPEC|(?:%@CFWS?%@))CFWS?", self.dispNameString, self.angleAddrSpecString]; // GOOD
 				//NSString *str = [NSString stringWithFormat:@"%@", self.angleAddrSpecString];
 			}
@@ -161,11 +165,21 @@
 
 	pattern = [pattern stringByReplacingOccurrencesOfString:@"CMNT" withString:[insertCommentString length] ? insertCommentString : self.fwsString];
 
-	if([self.compressFWS boolValue]) {
-		pattern = [pattern stringByReplacingOccurrencesOfString:@"FWS?" withString:[self.compressFWS boolValue] ? @"(?:\x20)*" : self.fwsString];
-		pattern = [pattern stringByReplacingOccurrencesOfString:@"FWS" withString:[self.compressFWS boolValue] ? @"(?:\x20)+" : self.fwsString];
-	} else {
-		pattern = [pattern stringByReplacingOccurrencesOfString:@"FWS" withString:[self.compressFWS boolValue] ? @"xxx" : self.fwsString];
+	switch([self.treatFWS integerValue]) {
+	case fwsFull:
+		pattern = [pattern stringByReplacingOccurrencesOfString:@"FWS" withString:self.fwsString];
+		break;
+	case fwsSpacesTabs:
+		pattern = [pattern stringByReplacingOccurrencesOfString:@"FWS" withString:@"(?:(?:\x20|\x09)+)"];
+		break;
+	case fwsDisplayNameOnly:
+	default:
+		pattern = [pattern stringByReplacingOccurrencesOfString:@"|FWS?" withString:@""];
+		pattern = [pattern stringByReplacingOccurrencesOfString:@"FWS?" withString:@""];
+		pattern = [pattern stringByReplacingOccurrencesOfString:@"|FWS" withString:@""];
+		pattern = [pattern stringByReplacingOccurrencesOfString:@"FWS" withString:@""];
+NSLog(@"fwsDisplayNameOnly %@", pattern);
+		break;
 	}
 	assert([pattern length]);
 

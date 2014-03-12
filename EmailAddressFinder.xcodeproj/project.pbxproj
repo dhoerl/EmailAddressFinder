@@ -52,6 +52,7 @@
 		DEF0FAC7184902F000A24442 /* RFC-5322-Mailbox.txt in Resources */ = {isa = PBXBuildFile; fileRef = DEF0FABB184902F000A24442 /* RFC-5322-Mailbox.txt */; };
 		DEF0FAC8184902F000A24442 /* RFC-5322.txt in Resources */ = {isa = PBXBuildFile; fileRef = DEF0FABC184902F000A24442 /* RFC-5322.txt */; };
 		DEF0FAC9184902F000A24442 /* Test.txt in Resources */ = {isa = PBXBuildFile; fileRef = DEF0FABD184902F000A24442 /* Test.txt */; };
+		DEF0FACC1849486500A24442 /* Mailto.txt in Resources */ = {isa = PBXBuildFile; fileRef = DEF0FACB1849486500A24442 /* Mailto.txt */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -115,6 +116,7 @@
 		DEF0FABC184902F000A24442 /* RFC-5322.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "RFC-5322.txt"; sourceTree = "<group>"; };
 		DEF0FABD184902F000A24442 /* Test.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Test.txt; sourceTree = "<group>"; };
 		DEF0FACA1849039000A24442 /* LICENSE.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = LICENSE.txt; sourceTree = "<group>"; };
+		DEF0FACB1849486500A24442 /* Mailto.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Mailto.txt; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -284,6 +286,7 @@
 		DEF0FAB1184902F000A24442 /* RegularExpressionComponents */ = {
 			isa = PBXGroup;
 			children = (
+				DEF0FACB1849486500A24442 /* Mailto.txt */,
 				DEF0FAB2184902F000A24442 /* Regex1.txt */,
 				DEF0FAB3184902F000A24442 /* Regex2.txt */,
 				DEF0FAB4184902F000A24442 /* RFC-5321-IPv6.txt */,
@@ -386,6 +389,7 @@
 				DEF0FAC7184902F000A24442 /* RFC-5322-Mailbox.txt in Resources */,
 				DEB43C721775F35C0057DEDD /* PrintMe.txt in Resources */,
 				DE72F5431790ACB7008CC151 /* TestForFailure.txt in Resources */,
+				DEF0FACC1849486500A24442 /* Mailto.txt in Resources */,
 				DE72F5441790ACBA008CC151 /* TestForSuccess.txt in Resources */,
 				DE72F5451790ACC1008CC151 /* tests-iamcal.xml in Resources */,
 				DEF0FAC5184902F000A24442 /* RFC-5322-Display-Name.txt in Resources */,

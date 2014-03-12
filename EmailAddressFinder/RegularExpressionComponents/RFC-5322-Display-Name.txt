@@ -50,5 +50,5 @@
       )
     )*
   )+
-  CFWS?
+  DISPLAY_NAME_CFWS? # translated in code to spaces/tabs or CFWS
 )? # display_name

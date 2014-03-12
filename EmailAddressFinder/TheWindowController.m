@@ -43,7 +43,7 @@ typedef enum { validateMode=1, scanMode } regex_typ;
 	IBOutlet NSButton		*addrSpecOnly;
 	IBOutlet NSButton		*allowCFWS;
 	IBOutlet NSButton		*posix;
-	IBOutlet NSButton		*fullFWS;
+	IBOutlet NSPopUpButton	*fullFWS;
 	IBOutlet NSButton		*allowNullString;	// local-name -> ""
 	IBOutlet NSButton		*rfc5321IPV6;
 	IBOutlet NSButton		*rfc5321Lengths;
@@ -57,7 +57,8 @@ typedef enum { validateMode=1, scanMode } regex_typ;
 
 	IBOutlet NSSegmentedControl	*pasteType;
 	IBOutlet NSButton		*pasteTextButton;
-	IBOutlet NSButton		*pasteStringButton;
+	IBOutlet NSButton		*pasteString1Button;
+	IBOutlet NSButton		*pasteString2Button;
 
 	IBOutlet NSButton		*regressionTests;
 
@@ -99,10 +100,14 @@ typedef enum { validateMode=1, scanMode } regex_typ;
 
 	[self regexSelection:regExButton];
 	
-[testString setString:@"\"Fuddy\" <dhoerl@mac.com>"];
-[testString setString:@"test_exa-mple.com"];
-		[cmntLevelSlider setIntegerValue:1];
-		[cmntLevelValue setStringValue:@"1"];
+//[testString setString:@"\"Fuddy\" <dhoerl@mac.com>"];
+//[testString setString:@"test_exa-mple.com"];
+	[testString setString:@""];
+	[testString setAutomaticQuoteSubstitutionEnabled:NO];
+	[testString setSmartInsertDeleteEnabled:NO];
+	
+	//[cmntLevelSlider setIntegerValue:1];
+	//[cmntLevelValue setStringValue:@"1"];
 
 	interInput = [[testString string] copy];
 
@@ -145,7 +150,8 @@ typedef enum { validateMode=1, scanMode } regex_typ;
 	
 	pasteType.enabled = isOff;
 	pasteTextButton.enabled = isOff;
-	pasteStringButton.enabled = isOff;
+	pasteString1Button.enabled = isOff;
+	pasteString2Button.enabled = isOff;
 
 	regressionTests.enabled = isOff;
 
@@ -155,14 +161,14 @@ typedef enum { validateMode=1, scanMode } regex_typ;
 
 	// Validating
 	if(
-		[captureGroups state] == NSOffState		&&
-		[addrSpecOnly state] == NSOnState		&&
-		[allowCFWS state] == NSOffState			&&
-		[posix state] == NSOnState				&&
-		[fullFWS state] == NSOffState			&&
-		[allowNullString state] == NSOffState	&&
-		[rfc5321IPV6 state] == NSOffState		&&
-		[rfc5321Lengths state] == NSOffState	&&
+		[captureGroups state] == NSOffState					&&
+		[addrSpecOnly state] == NSOnState					&&
+		[allowCFWS state] == NSOffState						&&
+		[posix state] == NSOnState							&&
+		[fullFWS indexOfSelectedItem] == fwsDisplayNameOnly	&&
+		[allowNullString state] == NSOffState				&&
+		[rfc5321IPV6 state] == NSOffState					&&
+		[rfc5321Lengths state] == NSOffState				&&
 		[cmntLevelSlider integerValue] == 0
 	) {
 		color = [NSColor greenColor];
@@ -174,13 +180,13 @@ typedef enum { validateMode=1, scanMode } regex_typ;
 
 	// Compliance
 	if(
-		[captureGroups state] == NSOnState		&&
-		[addrSpecOnly state] == NSOffState		&&
-		[posix state] == NSOnState				&&
-		[fullFWS state] == NSOnState			&&
-		[allowNullString state] == NSOnState	&&
-		[rfc5321IPV6 state] == NSOnState		&&
-		[rfc5321Lengths state] == NSOnState		&&
+		[captureGroups state] == NSOnState					&&
+		[addrSpecOnly state] == NSOffState					&&
+		[posix state] == NSOnState							&&
+		[fullFWS indexOfSelectedItem] == fwsFull			&&
+		[allowNullString state] == NSOnState				&&
+		[rfc5321IPV6 state] == NSOnState					&&
+		[rfc5321Lengths state] == NSOnState					&&
 		[cmntLevelSlider integerValue] == 2
 	) {
 		color = [allowCFWS state] == NSOffState ? [NSColor greenColor] : [NSColor yellowColor];
@@ -398,7 +404,7 @@ typedef enum { validateMode=1, scanMode } regex_typ;
 		[addrSpecOnly setState:NSOffState];
 		[allowCFWS setState:NSOffState];
 		[posix setState:NSOnState];
-		[fullFWS setState:NSOnState];
+		[fullFWS selectItemAtIndex:fwsFull];
 		[allowNullString setState:NSOnState];
 		[rfc5321IPV6 setState:NSOnState];
 		[rfc5321Lengths setState:NSOnState];
@@ -410,7 +416,7 @@ typedef enum { validateMode=1, scanMode } regex_typ;
 		[addrSpecOnly setState:NSOnState];
 		[allowCFWS setState:NSOffState];
 		[posix setState:NSOnState];
-		[fullFWS setState:NSOffState];
+		[fullFWS selectItemAtIndex:fwsDisplayNameOnly];
 		[allowNullString setState:NSOffState];
 		[rfc5321IPV6 setState:NSOffState];
 		[rfc5321Lengths setState:NSOffState];
@@ -500,7 +506,7 @@ typedef enum { validateMode=1, scanMode } regex_typ;
 			kValidateRegEx		: @(style == validateMode),
 			kAllowCFWSwithAT	: @([allowCFWS state] == NSOnState),
 			kCaptureGroups		: @([captureGroups state] == NSOnState),
-			kCompressedFWS		: @([fullFWS state] == NSOffState),
+			kFWStreatment		: @([fullFWS indexOfSelectedItem]),
 			kAllowNullStr		: @([allowNullString state] == NSOnState),
 			kUseRFC5321IPV6		: @([rfc5321IPV6 state] == NSOnState),
 			kUseRFC5321Len		: @([rfc5321Lengths state] == NSOnState),
